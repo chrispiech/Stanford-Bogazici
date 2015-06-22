@@ -22,8 +22,10 @@
 			<p>
 				Written by Eric Roberts
 			</p>
-
-			<p>Worked Example: 
+			<p>
+				Handouts: 
+				<a href ="{{pathToRoot}}handouts/events.html">Events Reference</a><br>
+				Worked Example: 
 				<a href="{{pathToRoot}}projects/stampTool.html">StampTool</a>
 			</p>
 
@@ -95,6 +97,7 @@
 					<p>And implement the method:
 					<div class="well"><code>public void mouseMoved(MouseEvent e)</code></div>
 					<p>Then any time the mouse is moved the method mouseMoved will be executed.
+					<p>You can learn more about MouseEvents <a href="{{pathToRoot}}handouts/events.html">here</a>.
 			</div>
 		</div>
 
@@ -229,7 +232,7 @@ which might generate a ball going more or less straight down.  That would make l
 					<li style="margin-bottom:10px">
 						<i>Add sounds.</i>  
 						<p>The version that is running as an applet on the CS 106A assignment page plays a short bounce sound every time the ball collides with a brick or the paddle.  This extension turns out to be very easy.  The starter project contains an audio clip file called bounce.au that contains that sound.  You can load the sound by writing
-						<div class="well"><code>AudioClip bounceClip = MediaTools.loadAudioClip("bounce.au");</code></div>
+						<div class="well"><code>AudioClip bounceClip = MediaTools.loadAudioClip("res/bounce.au");</code></div>
 						<p>and later play it by calling
 						<div class="well"><code>bounceClip.play();</code></div>
 						The Java libraries do make some things easy.
