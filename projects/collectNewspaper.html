@@ -175,10 +175,21 @@
 		<!-- Header -->
 		<div id="pageHeader">
 			<h1>
-				Karel Reference
+				Collect Newspaper
 			</h1>
 			<p>
-				Written by Eric Roberts
+				Based on a handout by Eric Roberts
+			</p>
+			<p>
+				<!--Topics:
+				KarelCommands,
+				Methods
+				<br/>-->
+				Handouts: 
+				<a href ="../handouts/karel.html">KarelReference</a>
+				<br/>
+				Worked Example: 
+				<a href="../projects/stepUp.html">StepUp</a>
 			</p>
 
 		</div>
@@ -186,14 +197,30 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<!--<p>
-					Karel is a very simple robot who lives in a very simple world. Karel has been used to teach computer science to generations of Stanford students. Below is a complete description of Karel.
-				</p>-->
-				<center><img style="width:700px;" src="../img/handouts/karel/karelHandout.png"></img></center>
+				<p>
+					Your first task is to solve a simple story-problem in Karel's world.  Suppose that Karel has settled into its house, which is the square area in the center of the following diagram:
+				</p>
+				<center>
+					<img class="psetImg" src="../img/projects/newspaper/newspaper.png">	
+				</center>
+				<p>
+					Karel starts off in the corner of its house as shown in the diagram. The problem Karel needs to solve is to collect the newspaper, represented (as all objects in Karel's world are) by a beeper, from outside the doorway and then to return to her initial position.
+				</p>
+				<p>
+					You can assume that every part of the world looks just as it does in the diagram.  The house is exactly this size, the door is always in the position shown, and the beeper is just outside the door.  Thus, all you have to do is write the sequence of commands necessary to have Karel
+					<ol>
+						<li>Move to the newspaper,</li>
+						<li>Pick it up, and</li>
+						<li>Return to its starting point.</li>
+					</ol>
+				</p>
+				<p>
+					Even though the program is only a few lines, it is still worth getting at least a little practice in decomposition.  In your solution, include a private method for each of the steps shown in the outline.
+				</p>
 			</div>
+
 		</div>
 
-		
 		
 <hr>
 

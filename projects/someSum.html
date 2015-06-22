@@ -28,7 +28,7 @@
 </head>
 <body>
 
-	<!-- Navigation Bar -->
+  <!-- Navigation Bar -->
 <nav class="navbar-inverse navbar-default" role="navigation">
   <div class="container-fluid">
   	<div class="container">
@@ -169,32 +169,63 @@
 
 
 
-	<!-- Main Content -->
-	<div class="container">
+  <!-- Main Content -->
+  <div class="container">
 
-		<!-- Header -->
-		<div id="pageHeader">
-			<h1>
-				Karel Reference
-			</h1>
-			<p>
-				Written by Eric Roberts
-			</p>
+    <!-- Header -->
+    <div id="pageHeader">
+      <h1>
+        That's Some Sum!
+      </h1>
+      <p>
+        Problem written by Bryce C-R, Julia Lee, Chris Piech, and TY Huang
+      </p>
 
-		</div>
-		<hr/>
+    </div>
+    <hr/>
 
-		<div class="row">
-			<div class="col-md-12">
-				<!--<p>
-					Karel is a very simple robot who lives in a very simple world. Karel has been used to teach computer science to generations of Stanford students. Below is a complete description of Karel.
-				</p>-->
-				<center><img style="width:700px;" src="../img/handouts/karel/karelHandout.png"></img></center>
-			</div>
-		</div>
+    <div class="row">
+      <div class="col-md-12">
+        <p> Write a program that reads in 10 integers from the user and then outputs the sum of the entered values.</p>
+        <p>
+          <center>
+            <img style="width:600px" src="../img/projects/someSum/demo.png">  
+          </center>
+        </p>
+      </div>
 
-		
-		
+<!--pre id="editor" style="height:400px">/**
+ * Program: That's Some Sum
+ * -------------
+ * This program reads in 10 integers from the user and then prints their sum.
+ */
+
+public class SomeSum extends ConsoleProgram {
+  
+  public void run() {
+    println("Enter 10 nums. I will show you the sum!");
+    int sum = 0;
+      
+    for(int i=0; i<10; i++) {
+      sum = sum + readInt("Please enter an integer: ");
+    }
+
+    println("");
+    println("The sum is: " + sum);
+  }
+}</pre-->
+    
+<script src="../plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+   editor.setTheme('ace/theme/eclipse');
+   editor.getSession().setMode("ace/mode/java");
+   editor.setReadOnly(true);
+   editor.renderer.setShowGutter(false); 
+    /*editor.setTheme("ace/theme/eclipse");
+    editor.getSession().setMode("ace/mode/java");*/
+</script>
+    
 <hr>
 
 <div class="footer">
@@ -221,5 +252,5 @@
 	})();
 </script>-->
 
-	</div>
+  </div>
 </body>
