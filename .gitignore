@@ -1,5 +1,4 @@
 .DS_Store
-projects/
 *.pyc
 index.html
 plugins/*.pyc
