@@ -176,10 +176,16 @@
 		<!-- Header -->
 		<div id="pageHeader">
 			<h1>
-				Variable Scope
+				Waves of Sound
 			</h1>
 			<p>
-				Written by Chris Piech and Mehran Sahami
+				Inspired by, and built off an assignment by Keith Schwarz. Created by Chris Piech and Bryce Cronkite-Ratcliff
+			</p>
+			<p>
+				Example:
+				<a href ="../projects/snow.html">Snow</a>
+				<br/>Handouts:
+				<a href ="../handouts/arrayLists.html">ArrayLists</a>
 			</p>
 
 		</div>
@@ -187,124 +193,129 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables</h2>
+				
+				<p>Humans are always looking for new sounds, and recently a growing number of artists have been using programs to create experiences that instruments are unable to produce. Here are two examples of songs that were created with computer generated sounds:</p>
 				<p>
-					Local variables are created local to the method (or the block...see "Block Scope" section below) in which they are defined. They are destroyed when execution of the method has been completed. Local variables can only be accessed from within the method in which they are declared.  Because of their transient nature, local variables cannot store persistent information about an object between method calls.
+					<center>
+					<iframe width="400" height="315" src="//www.youtube.com/embed/mehLx_Fjv_c" frameborder="0" allowfullscreen></iframe>
+					<iframe width="400" height="315" src="//www.youtube.com/embed/Sk9XYQMRiLY" frameborder="0" allowfullscreen></iframe>
+					</center>
 				</p>
+				<p>
+					Write a program that reads in notes from the user (or a pause) until the user enters the String "play." Then play the composition back to the user.
+				</p>
+				<p>
+					<center>
+						<img style="width:450px" src="../img/projects/music/mary.png">
+
+					</center>
+				</p>
+				<p>Just for fun: Can you figure out what the above song plays?</p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables Example</h2>
+				<h2>Audio</h2>
 				<p>
-					Consider, for example, the following snippet of code.
+					There are two Audio methods that will allow you to generate and play notes.
 				</p>
-				<pre id="editor" style="height:200px">public class AnExample extends ConsoleProgram {
+				<div class="well"><code>ArrayList&lt;Double&gt; <i>samples</i> = Audio.getNoteSamples(<i>frequency</i>, <i>length</i>)</code></div>
+				<div class="well"><code>Audio.play(<i>arrayListOfDoubles</i>)</code></div>
+				<p><b>getNoteSamples</b> is a method that takes in two numbers, a frequency and a length in samples (there are 44,100 samples per second in CD quality sound). The frequency defines the note being played. For example a C note has frequency 130.81 Hz and a G note has frequency 196.00 Hz. You should use the contants defined. The method returns an ArrayList of Doubles, which represents the samples of the wave that makes the sound. </p>
 
-	public void methodOne {
-		int a = readInt("Enter a: ");
-		println("a = " + a);
- 	}
+				<p>Say the wave below has a frequency of 130.81 Hz (and is thus a C note). The method will sample the wave, and return the doubles collected from the sample, in the range (-1, 1):</p>
 
-	public void methodTwo {
-		int b = a;  // BUG!: cannot refer to variable a in methodOne
-		println("b = " + b);
-	}
-}</pre>
 				<p>
-					The variables a and b are local variables declared within different methods in the class AnExample. Because these variables are local variables, a can only be referred to within methodOne and variable b can only be accessed within methodTwo. Our attempt to initialize b using the value of a is illegal, as code in methodTwo cannot access local variables from methodOne or any other method.
+					<center>
+					<img style="width:450px" src="../img/projects/music/sound2.png">
+					<br/><i style="text-align:center">Image courtesy of Keith</i>
+				</center>
 				</p>
-				<p>
-				Because local variable values do not persist after their containing method has completed, the variable a will be destroyed when methodOne has completed execution. The next time methodOne is called, a new variable a will be created.
-			</p>
+
+				<p><b>play</b> is a method that takes in a list of samples (which must be of type ArrayList&lt;Double&gt;) and plays it to the users.</p>
+				
+				<p>To get started try and generate a single C note of length <i>NOTE_LENGTH</i> and play it back to the user.</p>
+				
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Block Scope</h2>
+				<h2>User Composition</h2>
 				<p>
-					While we typically think of local variables as local to a particular method, in Java local variables are actually local to a block of code. While a method defines a block of code (since the opening and closing braces of the method define a block), for and while loops, if-statements, and other constructs are also considered blocks of code. If we declare a local variable inside one of these constructs, the local variable will be created when it is declared in the block and destroyed when the block ends execution.</p>
-				<p>Consider the following example:</p>
-				<pre id="editor2" style="height:400px">public class AnExample extends ConsoleProgram {
-	
-	public void methodThree {
-		int a = 4;
-
- 	 	for (int i = 0; i &lt; 5; i++) {
-			int b = a; // this is okay
-
-			if (a > b) { // okay to access a and b here
-				int c = 3;
-
-				println(i); // okay to access i here
-				println(b); // okay to access b here
-				println(c); // okay to access c here
-			}
-
-			println(c); // illegal: c is no longer in scope here
-		}
-
-		println(a); // okay to access a here
-		println(b); // illegal: b is only in scope in body of for loop
-		println(i); // illegal: i is only in scope in body of for loop
-	}
-}</pre>
-				<p>
-					The variable a is local to methodThree, so accessing a within the for loop, or in the println is fine.  The variables i and b are only in scope (i.e., "alive") within the confines of the for loop in which they are declared.  They are no longer available by the time the last two printlns try to access them.  The variable c is only in scope within the confines of the if statement body in which it is declared.  Note that a new copy of c will get created each time the if statement body is executed, therefore it cannot be used to store values across iterations of the for loop.
+					Write code that continually collects notes from the user (until they type "play") and puts them together into a single song. If the user enters one of the notes in the pentatonic scale (C, D, G, E or A) add the samples for that note to the song. If the user enters "pause", add <i>NOTE_LENGTH</i> number of samples with value 0. 
 				</p>
+
+				<p>To compare strings, don't use the == operator. Instead you should use:</p>
+				<div class="well"><code><i>s1</i>.equals(<i>s2</i>)</code></div>
+				<p>That's all! Welcome to the world of ArrayLists and computer music. If you finish early try an extension.</p>
 			</div>
 		</div>
-		<!--<div class="row">
-			<div class="col-md-12">
-				<h2>Instance Variables</h2>
-				<p>More coming...</p>
-			</div>
-		</div>-->
+
+		<hr>
+
+
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Constants</h2>
+				<h2>Extension 1: Chords</h2>
 				<p>
-					we will sometimes find it useful to define a "variable" whose value does not change during the entire program. Such a variable is called a constant. In this case, the constant does not fulfill the traditional purpose of a variable (i.e., storing a temporary program value).  To declare a variable as a constant, use the keyword final when declaring the variable. Virtually all constants are declared outside all method calls so that their scope is the entire program. 
+					If you want to play two notes at the same time the solution is simple, you just add the waves together (in other words you add each value in the list of doubles together).
 				</p>
-				<p> Constants are usually written in all upper case letters to show that they do not change. The key-words private static final, which we include for good practice, are important when you write larger programs.
-				<p>
-					Consider this example:
-				</p>
-				<pre id="editor3" style="height:180px">public class AnExample extends ConsoleProgram {
-	
-	private static final GRAVITY_ACCELERATION = 9.8;
 
-	public void run() {
-		double initialVelocity = 0;
-		double newVelocity = intialVelocity + GRAVITY_ACCELERATION;
-		println("velocity after 1 s: " + newVelocity);
-	}
-}</pre>
+				<p>
+					<center>
+					<img style="width:450px" src="../img/projects/music/sumofwaves.png">
+				</center>
+				</p>
+
+				<p>
+					When you add two waves together, some points may become larger than 1 or smaller than -1 (the bounds for a sound wave). After you add your samples together you should normalize the wave. In plainer words, find the maximum value in your ArrayList and divide all values by the max.
+				</p>
+
+				<p>Add "c-chord" to the list of commands the user can enter. C chords are made up of the notes C, E and G played at the same time.</p>
+
+				
+				
 			</div>
 		</div>
-    
-<script src="../plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    var editor = ace.edit("editor");
-   editor.setTheme('ace/theme/eclipse');
-   editor.getSession().setMode("ace/mode/java");
-   editor.setReadOnly(true);
-   editor.renderer.setShowGutter(false); 
 
-   var editor2 = ace.edit("editor2");
-   editor2.setTheme('ace/theme/eclipse');
-   editor2.getSession().setMode("ace/mode/java");
-   editor2.setReadOnly(true);
-   editor2.renderer.setShowGutter(false);
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Extension 2: Algorithmic Song</h2>
+				<p>
+					Add higher level phrases that the user can enter. Use loops and methods to make complex sounds. For example, maybe you want to let the user enter the text "chorus" and then you can algorithmically create a series of notes that make up the chorus of a song.
+				</p>
 
-   var editor3 = ace.edit("editor3");
-   editor3.setTheme('ace/theme/eclipse');
-   editor3.getSession().setMode("ace/mode/java");
-   editor3.setReadOnly(true);
-   editor3.renderer.setShowGutter(false);
-</script>
+				<p>You can make richer sounds, that are closer to the ones used by Tycho and Pretty Lights (in the examples at the beggining).</p>
+
+				<p>Please share any songs you create with us.</p>
+				
+				
+				
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Extension 3: Graphical Interface</h2>
+				<p>
+					Make a graphical interface using a grid of GRects where each row represents a note (C, D, G, E, A) and each column represents a point in time. If a GRect is turned on (is colored blue) you should play that note at that time.
+				</p>
+
+				<p>Ask us about buttons</p>
+
+				<p>
+					<center>
+					<img style="width:100%" src="../img/projects/music/gcomposer.png">
+				</center>
+				</p>
+
+
+				
+			</div>
+		</div>
+
 		
 <hr>
 

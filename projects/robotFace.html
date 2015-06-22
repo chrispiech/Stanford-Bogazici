@@ -176,10 +176,10 @@
 		<!-- Header -->
 		<div id="pageHeader">
 			<h1>
-				Variable Scope
+				Draw Robot Face
 			</h1>
 			<p>
-				Written by Chris Piech and Mehran Sahami
+				Problem written by Eric Roberts. Updated by Chris Piech.
 			</p>
 
 		</div>
@@ -187,103 +187,129 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables</h2>
 				<p>
-					Local variables are created local to the method (or the block...see "Block Scope" section below) in which they are defined. They are destroyed when execution of the method has been completed. Local variables can only be accessed from within the method in which they are declared.  Because of their transient nature, local variables cannot store persistent information about an object between method calls.
+					Write a program that draws this picture. You should use the constants provided, but feel free to change them (or recolor any part of the face)</p>
+
+				<p>
+					<center>
+						<img style="width:500px" src="../img/projects/robotFace/face.png">	
+					</center>
+				</p>
+
+				<p>A few constants are provided. Use them so that you don't have "magic" numbers in your program.</p>
+
+				<p>
+					<div class="well">
+						<code style = "font-size:12px">
+							/*The width of the robot face:*/
+							<br/>private static final int FACE_WIDTH = 300;
+							<br/>
+							<br/>/*The height of the robot face:*/
+							<br/>private static final int FACE_HEIGHT = 350;
+							<br/>
+							<br/>/*The diameter of each robot eye:*/
+							<br/>private static final int EYE_DIAMETER = 70;
+							<br/>
+							<br/>/*The distance from the top of the head to the top of the eyes:*/
+							<br/>private static final int EYE_Y_OFFSET = 40;
+							<br/>
+							<br/>/*The width of the mouth:*/
+							<br/>private static final int MOUTH_WIDTH = 150;
+							<br/>
+							<br/>/*The height of the mouth:*/
+							<br/>private static final int MOUTH_HEIGHT = 30;
+							<br/>
+							<br/>/*The distance from the top of the head to the top of the mouth:*/
+							<br/>private static final int MOUTH_Y_OFFSET = 200;
+							<br/>
+							<br/>/*The distance from the top of the screen to the base of the label:*/
+							<br/>private static final int LABEL_Y = 50;
+						</code>
+					</div>
 				</p>
 			</div>
 		</div>
-
+		
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables Example</h2>
-				<p>
-					Consider, for example, the following snippet of code.
-				</p>
-				<pre id="editor" style="height:200px">public class AnExample extends ConsoleProgram {
+				<h2>Solution</h2>
 
-	public void methodOne {
-		int a = readInt("Enter a: ");
-		println("a = " + a);
- 	}
 
-	public void methodTwo {
-		int b = a;  // BUG!: cannot refer to variable a in methodOne
-		println("b = " + b);
-	}
-}</pre>
-				<p>
-					The variables a and b are local variables declared within different methods in the class AnExample. Because these variables are local variables, a can only be referred to within methodOne and variable b can only be accessed within methodTwo. Our attempt to initialize b using the value of a is illegal, as code in methodTwo cannot access local variables from methodOne or any other method.
-				</p>
-				<p>
-				Because local variable values do not persist after their containing method has completed, the variable a will be destroyed when methodOne has completed execution. The next time methodOne is called, a new variable a will be created.
-			</p>
-			</div>
-		</div>
+<pre id="editor" style="height:1220px">/**
+ * Draw Face
+ * ---------
+ * Draws an awesome robot face, with label and different colored
+ * eyes!!!@#$%#@!
+ */
+public class DrawFace extends GraphicsProgram {
 
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Block Scope</h2>
-				<p>
-					While we typically think of local variables as local to a particular method, in Java local variables are actually local to a block of code. While a method defines a block of code (since the opening and closing braces of the method define a block), for and while loops, if-statements, and other constructs are also considered blocks of code. If we declare a local variable inside one of these constructs, the local variable will be created when it is declared in the block and destroyed when the block ends execution.</p>
-				<p>Consider the following example:</p>
-				<pre id="editor2" style="height:400px">public class AnExample extends ConsoleProgram {
-	
-	public void methodThree {
-		int a = 4;
-
- 	 	for (int i = 0; i &lt; 5; i++) {
-			int b = a; // this is okay
-
-			if (a > b) { // okay to access a and b here
-				int c = 3;
-
-				println(i); // okay to access i here
-				println(b); // okay to access b here
-				println(c); // okay to access c here
-			}
-
-			println(c); // illegal: c is no longer in scope here
-		}
-
-		println(a); // okay to access a here
-		println(b); // illegal: b is only in scope in body of for loop
-		println(i); // illegal: i is only in scope in body of for loop
-	}
-}</pre>
-				<p>
-					The variable a is local to methodThree, so accessing a within the for loop, or in the println is fine.  The variables i and b are only in scope (i.e., "alive") within the confines of the for loop in which they are declared.  They are no longer available by the time the last two printlns try to access them.  The variable c is only in scope within the confines of the if statement body in which it is declared.  Note that a new copy of c will get created each time the if statement body is executed, therefore it cannot be used to store values across iterations of the for loop.
-				</p>
-			</div>
-		</div>
-		<!--<div class="row">
-			<div class="col-md-12">
-				<h2>Instance Variables</h2>
-				<p>More coming...</p>
-			</div>
-		</div>-->
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Constants</h2>
-				<p>
-					we will sometimes find it useful to define a "variable" whose value does not change during the entire program. Such a variable is called a constant. In this case, the constant does not fulfill the traditional purpose of a variable (i.e., storing a temporary program value).  To declare a variable as a constant, use the keyword final when declaring the variable. Virtually all constants are declared outside all method calls so that their scope is the entire program. 
-				</p>
-				<p> Constants are usually written in all upper case letters to show that they do not change. The key-words private static final, which we include for good practice, are important when you write larger programs.
-				<p>
-					Consider this example:
-				</p>
-				<pre id="editor3" style="height:180px">public class AnExample extends ConsoleProgram {
-	
-	private static final GRAVITY_ACCELERATION = 9.8;
+	private static final int FACE_WIDTH = 300;
+	private static final int FACE_HEIGHT = 350;
+	private static final int EYE_DIAMETER = 70;
+	private static final int EYE_Y_OFFSET = 40;
+	private static final int MOUTH_WIDTH = 150;
+	private static final int MOUTH_HEIGHT = 30;
+	private static final int MOUTH_Y_OFFSET = 200;
+	private static final int LABEL_Y = 50;
 
 	public void run() {
-		double initialVelocity = 0;
-		double newVelocity = intialVelocity + GRAVITY_ACCELERATION;
-		println("velocity after 1 s: " + newVelocity);
+		drawHead();
+		drawLeftEye();
+		drawRightEye();
+		drawMouth();
+		drawLabel();
+	}
+
+	private void drawHead() {
+		double x = (getWidth() - FACE_WIDTH) / 2;
+		double y = (getHeight() - FACE_HEIGHT) / 2;
+		GRect head = new GRect(x, y, FACE_WIDTH, FACE_HEIGHT);
+		head.setFilled(true);
+		head.setFillColor(Color.ORANGE);
+		add(head);
+	}
+	
+	private void drawLeftEye() {
+		double eyeSpacing = (FACE_WIDTH - 2 * EYE_DIAMETER) / 3;
+		double headX = (getWidth() - FACE_WIDTH) / 2;
+		double headY = (getHeight() - FACE_HEIGHT) / 2;
+		double x =  headX + eyeSpacing;
+		double y = headY + EYE_Y_OFFSET;
+		GOval eye = new GOval(x, y, EYE_DIAMETER, EYE_DIAMETER);
+		eye.setFilled(true);
+		eye.setFillColor(Color.BLUE);
+		add(eye);
+	}
+	
+	private void drawRightEye() {
+		double eyeSpacing = (FACE_WIDTH - 2 * EYE_DIAMETER) / 3;
+		double headX = (getWidth() - FACE_WIDTH) / 2;
+		double headY = (getHeight() - FACE_HEIGHT) / 2;
+		double x =  headX + eyeSpacing * 2 + EYE_DIAMETER;
+		double y = headY + EYE_Y_OFFSET;
+		GOval eye = new GOval(x, y, EYE_DIAMETER, EYE_DIAMETER);
+		eye.setFilled(true);
+		eye.setFillColor(Color.GREEN);
+		add(eye);
+	}
+	
+	private void drawMouth() {
+		double headX = (getWidth() - FACE_WIDTH) / 2;
+		double headY = (getHeight() - FACE_HEIGHT) / 2;
+		double x = headX + (FACE_WIDTH - MOUTH_WIDTH) / 2;
+		double y = headY + MOUTH_Y_OFFSET;
+		GRect mouth = new GRect(x, y, MOUTH_WIDTH, MOUTH_HEIGHT);
+		mouth.setFilled(true);
+		add(mouth);
+	}
+	
+	private void drawLabel() {
+		GLabel label = new GLabel("Robot Face");
+		label.setFont("Courier-50");
+		double x = (getWidth() - label.getWidth()) / 2;
+		add(label, x, LABEL_Y);
 	}
 }</pre>
-			</div>
-		</div>
     
 <script src="../plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -291,20 +317,13 @@
    editor.setTheme('ace/theme/eclipse');
    editor.getSession().setMode("ace/mode/java");
    editor.setReadOnly(true);
+   editor.setShowPrintMargin(false);
    editor.renderer.setShowGutter(false); 
-
-   var editor2 = ace.edit("editor2");
-   editor2.setTheme('ace/theme/eclipse');
-   editor2.getSession().setMode("ace/mode/java");
-   editor2.setReadOnly(true);
-   editor2.renderer.setShowGutter(false);
-
-   var editor3 = ace.edit("editor3");
-   editor3.setTheme('ace/theme/eclipse');
-   editor3.getSession().setMode("ace/mode/java");
-   editor3.setReadOnly(true);
-   editor3.renderer.setShowGutter(false);
+    /*editor.setTheme("ace/theme/eclipse");
+    editor.getSession().setMode("ace/mode/java");*/
 </script>
+	</div>
+	</div>
 		
 <hr>
 

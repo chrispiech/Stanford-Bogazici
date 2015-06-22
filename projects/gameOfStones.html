@@ -24,7 +24,15 @@
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}});
   </script>-->
 
-
+	<style type="text/css" media="screen">
+  #console {
+    overflow: hide;
+    border: solid 1px black;
+    background-color: white;
+    width: 500px;
+    height: 300px;
+  }
+</style>
 </head>
 <body>
 
@@ -176,10 +184,15 @@
 		<!-- Header -->
 		<div id="pageHeader">
 			<h1>
-				Variable Scope
+				Ancient Game of Nimm
 			</h1>
 			<p>
-				Written by Chris Piech and Mehran Sahami
+				Problem written by Danielle Kain and Chris Piech.
+			</p>
+			<p>
+				Worked Examples: 
+				<a href="../projects/emc2.html">E=MC2</a>,
+				<a href="../projects/fibb.html">Fibbonacci</a>
 			</p>
 
 		</div>
@@ -187,103 +200,131 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables</h2>
 				<p>
-					Local variables are created local to the method (or the block...see "Block Scope" section below) in which they are defined. They are destroyed when execution of the method has been completed. Local variables can only be accessed from within the method in which they are declared.  Because of their transient nature, local variables cannot store persistent information about an object between method calls.
+					Nimm is an ancient game of strategy that is named after the old German word for "take." It is also called Tiouk Tiouk in West Africa and Tsynshidzi in China. Players alternate taking stones until there is zero left. The game of Nimm goes as follows:
+<ol>
+<li>The game starts with a pile of 20 stones between the players</li>
+<li>The two players alternate turns</li>
+<li>On a given turn, a player may take either 1 or 2 stone from the center pile</li>
+<li>The two players continue until the center pile has run out of stones.</li>
+</ol>
+The last player to take a stone loses. Here is a screen shot from an example execution:
+					<center>
+						<img style="width:500px" src="../img/projects/nimm/nimm.png">	
+						<p style="text-align:center"><!--<i>Unique, unpredictable numbers for medicines.</i>--></p>
+					</center>
 				</p>
+
+				<p>Write a program to play Nimm. To make your life easier we have broken the problem down into smaller milestones. You have a lot of time for this program. Take it slowly, piece by piece.</p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables Example</h2>
-				<p>
-					Consider, for example, the following snippet of code.
+				<h2>Milestone 1</h2>
+				<p>Start with 20 stones. Repeat the process of removing stones and printing out how many stones are left until there are less than zero. Don't worry about whose turn it is. Don't worry about making sure only one or two stones are removed. Use the method <code>readInt(<i>msg</i>)</code> which prints msg and waits for the user to enter a number. 
 				</p>
-				<pre id="editor" style="height:200px">public class AnExample extends ConsoleProgram {
 
-	public void methodOne {
-		int a = readInt("Enter a: ");
-		println("a = " + a);
- 	}
 
-	public void methodTwo {
-		int b = a;  // BUG!: cannot refer to variable a in methodOne
-		println("b = " + b);
-	}
-}</pre>
-				<p>
-					The variables a and b are local variables declared within different methods in the class AnExample. Because these variables are local variables, a can only be referred to within methodOne and variable b can only be accessed within methodTwo. Our attempt to initialize b using the value of a is illegal, as code in methodTwo cannot access local variables from methodOne or any other method.
-				</p>
-				<p>
-				Because local variable values do not persist after their containing method has completed, the variable a will be destroyed when methodOne has completed execution. The next time methodOne is called, a new variable a will be created.
-			</p>
+				<center>
+						<img style="width:500px" src="../img/projects/nimm/nimm_m1.png">	
+						
+					</center>
+			</div>
+		</div>
+
+		
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Milestone 2</h2>
+				<p>Create a variable of type <code>int</code> to keep track of whose turn it is (remember there are two players). Tell the user whose turn it is. Each time someone picks up stones, change the player number.</p>
+
+				<center>
+						<img style="width:500px" src="../img/projects/nimm/nimm_m2.png">	
+						
+					</center>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Block Scope</h2>
-				<p>
-					While we typically think of local variables as local to a particular method, in Java local variables are actually local to a block of code. While a method defines a block of code (since the opening and closing braces of the method define a block), for and while loops, if-statements, and other constructs are also considered blocks of code. If we declare a local variable inside one of these constructs, the local variable will be created when it is declared in the block and destroyed when the block ends execution.</p>
-				<p>Consider the following example:</p>
-				<pre id="editor2" style="height:400px">public class AnExample extends ConsoleProgram {
-	
-	public void methodThree {
-		int a = 4;
-
- 	 	for (int i = 0; i &lt; 5; i++) {
-			int b = a; // this is okay
-
-			if (a > b) { // okay to access a and b here
-				int c = 3;
-
-				println(i); // okay to access i here
-				println(b); // okay to access b here
-				println(c); // okay to access c here
-			}
-
-			println(c); // illegal: c is no longer in scope here
-		}
-
-		println(a); // okay to access a here
-		println(b); // illegal: b is only in scope in body of for loop
-		println(i); // illegal: i is only in scope in body of for loop
-	}
-}</pre>
-				<p>
-					The variable a is local to methodThree, so accessing a within the for loop, or in the println is fine.  The variables i and b are only in scope (i.e., "alive") within the confines of the for loop in which they are declared.  They are no longer available by the time the last two printlns try to access them.  The variable c is only in scope within the confines of the if statement body in which it is declared.  Note that a new copy of c will get created each time the if statement body is executed, therefore it cannot be used to store values across iterations of the for loop.
+				<h2>Milestone 3</h2>
+				<p>Make sure that each turn only one or two stones are removed. After you read a number of stones to remove from a user (their input), you can use the following pattern to check if it was valid and keep asking until it is valid.</p>
+				<div class="well"><code>
+				while(<i>input is invalid</i>) {<br/>
+					&nbsp;&nbsp;&nbsp;<i>input</i> = readInt("Please enter 1 or 2: ");<br/>
+				}
+				</code></div>
 				</p>
 			</div>
 		</div>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Milestone 4</h2>
+				<p>Announce the winner.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Extensions</h2>
+				<p>Can you write an AI opponent? You can start with a dummy AI that always plays a random number. Then try to make one that plays intelligently...</p>
+
+				<p>Some other extension ideas:</p>
+				<ul>
+					<li>Make sure that if there is only one stick left, the last player may only remove one stone</li>
+					<li>Give the user the option for the winner to be the player that doesn’t take the last stone, or the player that does take the last stone.</li>
+					<li>Expand the game to let players take 1, 2, or 3, sticks per turn.</li>
+					<li>Divisible by 3 rule: if the number of sticks remaining at the end of a player’s turn is divisible by 3, they must go again.</li>
+					<li>Give the user the option to play against the computer and design a process for the computer to choose how many sticks to remove.</li>
+					<li>Come up with your own extension.</li>
+			</div>
+		</div>
+
+		
 		<!--<div class="row">
 			<div class="col-md-12">
-				<h2>Instance Variables</h2>
-				<p>More coming...</p>
-			</div>
-		</div>-->
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Constants</h2>
-				<p>
-					we will sometimes find it useful to define a "variable" whose value does not change during the entire program. Such a variable is called a constant. In this case, the constant does not fulfill the traditional purpose of a variable (i.e., storing a temporary program value).  To declare a variable as a constant, use the keyword final when declaring the variable. Virtually all constants are declared outside all method calls so that their scope is the entire program. 
-				</p>
-				<p> Constants are usually written in all upper case letters to show that they do not change. The key-words private static final, which we include for good practice, are important when you write larger programs.
-				<p>
-					Consider this example:
-				</p>
-				<pre id="editor3" style="height:180px">public class AnExample extends ConsoleProgram {
-	
-	private static final GRAVITY_ACCELERATION = 9.8;
+				<h2>Solution</h2>
 
+
+<pre id="editor" style="height:580px">/**
+ * Carbon Dating
+ * -------------
+ * This program shows how to translate between percent of natural carbon-14 found
+ * in a sample. First, it prints out a carbon-14 (c14) lookup table, then it has users
+ * enter a percent of c14 and returns the expected age. 
+ */
+public class CarbonDating extends ConsoleProgram {
+	
+	private static final int HALF_LIFE = 5700;
+	
 	public void run() {
-		double initialVelocity = 0;
-		double newVelocity = intialVelocity + GRAVITY_ACCELERATION;
-		println("velocity after 1 s: " + newVelocity);
+		// 1. Show the c-14 lookup table
+		double percent = 100.0;
+		int elapsed = 0;
+		println("Carbon dating lookup table");
+		println("fraction C-14 remaining:  years passed");
+		println("--------------------------");
+		for(int i = 0; i &lt; 10; i++) {
+			println(percent + "%:  " + elapsed + " years");
+			elapsed += HALF_LIFE;
+			percent /= 2;
+		}
+		println("");
+		
+		// 2. Look up the age of a sample
+		while(true) {
+			double percentLeft = readDouble("What percent of natural carbon-14 does your sample have? ");
+			double years = HALF_LIFE * Math.log(percentLeft / 100.0) / Math.log(0.5);
+			println(percentLeft + "% carbon-14 left...");
+			println("The sample is " + years + " years old");
+			println("");
+		}
 	}
-}</pre>
-			</div>
-		</div>
+}
+</pre>
     
 <script src="../plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -291,20 +332,13 @@
    editor.setTheme('ace/theme/eclipse');
    editor.getSession().setMode("ace/mode/java");
    editor.setReadOnly(true);
+   editor.setShowPrintMargin(false);
    editor.renderer.setShowGutter(false); 
-
-   var editor2 = ace.edit("editor2");
-   editor2.setTheme('ace/theme/eclipse');
-   editor2.getSession().setMode("ace/mode/java");
-   editor2.setReadOnly(true);
-   editor2.renderer.setShowGutter(false);
-
-   var editor3 = ace.edit("editor3");
-   editor3.setTheme('ace/theme/eclipse');
-   editor3.getSession().setMode("ace/mode/java");
-   editor3.setReadOnly(true);
-   editor3.renderer.setShowGutter(false);
+    /*editor.setTheme("ace/theme/eclipse");
+    editor.getSession().setMode("ace/mode/java");*/
 </script>
+	</div>
+	</div>-->
 		
 <hr>
 
@@ -333,4 +367,6 @@
 </script>-->
 
 	</div>
+
+	<script data-main="gameOfStones.js" src="js/requirejs/require.js"></script>
 </body>

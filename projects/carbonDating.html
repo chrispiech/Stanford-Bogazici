@@ -176,10 +176,15 @@
 		<!-- Header -->
 		<div id="pageHeader">
 			<h1>
-				Variable Scope
+				Carbon Dating
 			</h1>
 			<p>
-				Written by Chris Piech and Mehran Sahami
+				Problem written by Chris Piech
+			</p>
+			<p>
+				Worked Examples: 
+				<a href="../projects/emc2.html">E=MC2</a>,
+				<a href="../projects/fibb.html">Fibbonacci</a>
 			</p>
 
 		</div>
@@ -187,103 +192,117 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables</h2>
 				<p>
-					Local variables are created local to the method (or the block...see "Block Scope" section below) in which they are defined. They are destroyed when execution of the method has been completed. Local variables can only be accessed from within the method in which they are declared.  Because of their transient nature, local variables cannot store persistent information about an object between method calls.
+					You probably have seen or read news stories about fascinating ancient artifacts. At an archaeological dig a piece of wooden tool is unearthed and the archaeologist finds it to be 5,000 years old.  A child mummy is found high in the Andes and the archaeologist says the child lived more than 2,000 years ago. Ever wondered how they know?
 				</p>
+				<p>Carbon dating is a way of determining the age of certain archaeological artifacts of biological origin. Your job is to write a program that figures out how old a sample is.
+				</p>
+
+				<p>
+					<center>
+						<img style="width:500px" src="../img/projects/carbonDating/real.jpg">	
+						<p style="text-align:center"><i>This is a real velociraptor fossil. It's very old.</i></p>
+					</center>
+				</p>
+
+				<p>When an orgnanism is alive, its matter will have a constant amount of a special type of carbon called carbon-14 (c14). It turns out all living things have the same fraction: wood, mammoths, your body right now... small cats... all have the same amount.</p>
+				
+
+				<p>An important property of c14 is that it dissapears at a constant rate: every 5,700 years the amount of c14 is halfed (its half life is 5,700 years). For example, if one starts with 100% of the natural occurence of c14:
+				<p> &nbsp;&nbsp;&nbsp;&nbsp;In 5,700 years we expect there will only be 50% left. 
+				<br/> &nbsp;&nbsp;&nbsp;&nbsp;In 11,400 years we would expect there will only have 25% left. 
+				<br/> &nbsp;&nbsp;&nbsp;&nbsp;And so on...</p>
+
+				<p>When an organism is alive, it keeps replentishing its supply of c14 to the natural level. But when it dies (moment of silence), the amount of c14 starts to decrease. By testing how much c14 is left, scientists know how how long a dead thing has been dead for. Good times.</p>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Lookup Table</h2>
+				<p>To get started, lets make a lookup table that maps the percent of c14 remaining to the number of years the sample has been dead for. Print out the percent c14 remaining, and the number of years passed for the first 20 half lives. Your table should look like the following:</p>
+				<p>
+					<center>
+						<img style="width:300px" src="../img/projects/carbonDating/lookupTable.png">	
+					</center>
+				</p>
+				<p>Think about the variable type that you use to keep track of the amount of carbon left. What happens if you use an integer for percent?</p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Local Variables Example</h2>
+				<h2>Extension</h2>
+				<p>If you finish early, and have extra time, try this extension.</p>
+				<p>For scientists it will be much more useful for them to input the percent of natural c14 that they measured, and have the program tell them the age. Repeatedly ask the user to enter a percent of natural c14 remaining and then output the age of their sample.  </p>
 				<p>
-					Consider, for example, the following snippet of code.
+					<center>
+						<img style="width:490px" src="../img/projects/carbonDating/enter.png">	
+					</center>
 				</p>
-				<pre id="editor" style="height:200px">public class AnExample extends ConsoleProgram {
-
-	public void methodOne {
-		int a = readInt("Enter a: ");
-		println("a = " + a);
- 	}
-
-	public void methodTwo {
-		int b = a;  // BUG!: cannot refer to variable a in methodOne
-		println("b = " + b);
-	}
-}</pre>
+				<p>The formula for the age in years of a sample, given the percent of natural c14 remaining is:</p>
 				<p>
-					The variables a and b are local variables declared within different methods in the class AnExample. Because these variables are local variables, a can only be referred to within methodOne and variable b can only be accessed within methodTwo. Our attempt to initialize b using the value of a is illegal, as code in methodTwo cannot access local variables from methodOne or any other method.
+					<br/>
+					<center>
+						<img style="width:300px" src="../img/projects/carbonDating/formula.png">	
+					</center>
+					<br/>
 				</p>
+
+				<p>To take the natural log of a number (the ln function) use the method:
+					<div class="well"><code>Math.log(<i>value</i>)</code></div>
+				</p>	
+
+				<p>Overall, your program should look like the following</p>
 				<p>
-				Because local variable values do not persist after their containing method has completed, the variable a will be destroyed when methodOne has completed execution. The next time methodOne is called, a new variable a will be created.
-			</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Block Scope</h2>
-				<p>
-					While we typically think of local variables as local to a particular method, in Java local variables are actually local to a block of code. While a method defines a block of code (since the opening and closing braces of the method define a block), for and while loops, if-statements, and other constructs are also considered blocks of code. If we declare a local variable inside one of these constructs, the local variable will be created when it is declared in the block and destroyed when the block ends execution.</p>
-				<p>Consider the following example:</p>
-				<pre id="editor2" style="height:400px">public class AnExample extends ConsoleProgram {
-	
-	public void methodThree {
-		int a = 4;
-
- 	 	for (int i = 0; i &lt; 5; i++) {
-			int b = a; // this is okay
-
-			if (a > b) { // okay to access a and b here
-				int c = 3;
-
-				println(i); // okay to access i here
-				println(b); // okay to access b here
-				println(c); // okay to access c here
-			}
-
-			println(c); // illegal: c is no longer in scope here
-		}
-
-		println(a); // okay to access a here
-		println(b); // illegal: b is only in scope in body of for loop
-		println(i); // illegal: i is only in scope in body of for loop
-	}
-}</pre>
-				<p>
-					The variable a is local to methodThree, so accessing a within the for loop, or in the println is fine.  The variables i and b are only in scope (i.e., "alive") within the confines of the for loop in which they are declared.  They are no longer available by the time the last two printlns try to access them.  The variable c is only in scope within the confines of the if statement body in which it is declared.  Note that a new copy of c will get created each time the if statement body is executed, therefore it cannot be used to store values across iterations of the for loop.
+					<center>
+						<img style="width:700px" src="../img/projects/carbonDating/program.png">	
+					</center>
 				</p>
+				<p>All the best, and ask questions if you don't understand something (or want to know more about the archaeology)</p>
 			</div>
 		</div>
 		<!--<div class="row">
 			<div class="col-md-12">
-				<h2>Instance Variables</h2>
-				<p>More coming...</p>
-			</div>
-		</div>-->
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Constants</h2>
-				<p>
-					we will sometimes find it useful to define a "variable" whose value does not change during the entire program. Such a variable is called a constant. In this case, the constant does not fulfill the traditional purpose of a variable (i.e., storing a temporary program value).  To declare a variable as a constant, use the keyword final when declaring the variable. Virtually all constants are declared outside all method calls so that their scope is the entire program. 
-				</p>
-				<p> Constants are usually written in all upper case letters to show that they do not change. The key-words private static final, which we include for good practice, are important when you write larger programs.
-				<p>
-					Consider this example:
-				</p>
-				<pre id="editor3" style="height:180px">public class AnExample extends ConsoleProgram {
-	
-	private static final GRAVITY_ACCELERATION = 9.8;
+				<h2>Solution</h2>
 
+
+<pre id="editor" style="height:580px">/**
+ * Carbon Dating
+ * -------------
+ * This program shows how to translate between percent of natural carbon-14 found
+ * in a sample. First, it prints out a carbon-14 (c14) lookup table, then it has users
+ * enter a percent of c14 and returns the expected age. 
+ */
+public class CarbonDating extends ConsoleProgram {
+	
+	private static final int HALF_LIFE = 5700;
+	
 	public void run() {
-		double initialVelocity = 0;
-		double newVelocity = intialVelocity + GRAVITY_ACCELERATION;
-		println("velocity after 1 s: " + newVelocity);
+		// 1. Show the c-14 lookup table
+		double percent = 100.0;
+		int elapsed = 0;
+		println("Carbon dating lookup table");
+		println("fraction C-14 remaining:  years passed");
+		println("--------------------------");
+		for(int i = 0; i &lt; 10; i++) {
+			println(percent + "%:  " + elapsed + " years");
+			elapsed += HALF_LIFE;
+			percent /= 2;
+		}
+		println("");
+		
+		// 2. Look up the age of a sample
+		while(true) {
+			double percentLeft = readDouble("What percent of natural carbon-14 does your sample have? ");
+			double years = HALF_LIFE * Math.log(percentLeft / 100.0) / Math.log(0.5);
+			println(percentLeft + "% carbon-14 left...");
+			println("The sample is " + years + " years old");
+			println("");
+		}
 	}
-}</pre>
-			</div>
-		</div>
+}
+</pre>
     
 <script src="../plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -291,20 +310,13 @@
    editor.setTheme('ace/theme/eclipse');
    editor.getSession().setMode("ace/mode/java");
    editor.setReadOnly(true);
+   editor.setShowPrintMargin(false);
    editor.renderer.setShowGutter(false); 
-
-   var editor2 = ace.edit("editor2");
-   editor2.setTheme('ace/theme/eclipse');
-   editor2.getSession().setMode("ace/mode/java");
-   editor2.setReadOnly(true);
-   editor2.renderer.setShowGutter(false);
-
-   var editor3 = ace.edit("editor3");
-   editor3.setTheme('ace/theme/eclipse');
-   editor3.getSession().setMode("ace/mode/java");
-   editor3.setReadOnly(true);
-   editor3.renderer.setShowGutter(false);
+    /*editor.setTheme("ace/theme/eclipse");
+    editor.getSession().setMode("ace/mode/java");*/
 </script>
+	</div>
+	</div>-->
 		
 <hr>
 

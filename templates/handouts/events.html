@@ -1,0 +1,60 @@
+<head>
+
+	%include templates/parts/head.html
+
+
+</head>
+<body>
+
+	<!-- Navigation Bar -->
+	%include templates/parts/navBar.html
+
+	<!-- Main Content -->
+	<div class="container">
+
+		<!-- Header -->
+		<div id="pageHeader">
+			<h1>
+				Events Reference
+			</h1>
+			<p>
+				Written by Danielle Kain, Kevin Miller
+			</p>
+		</div>
+		<hr/>
+
+
+		Here's a list of the four events that you may find useful for Breakout. <br> For a full list, check out: <a href="http://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseListener.html">this link</a> for MouseEvents and <a href="http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyListener.html">this link</a> for KeyListeners. <br>
+		<div class="well"><code><pre>
+public void mouseClicked(MouseEvent e) {
+	//this method is called when the mouse is clicked
+}
+
+public void mouseMoved(MouseEvent e) {
+	//this method is called when the mouse is moved
+}
+			
+public void keyPressed(KeyEvent e) {
+	//this method is called when any key is pressed
+}
+
+waitForClick(); //this will pause until the user clicks. 
+		</pre></code></div>
+
+		<p>Here are some examples of how to use events:
+		<div class="well"><code><pre>
+public void mouseClicked(MouseEvent e) {
+	System.out.println("x: " + e.getX() + " y: " + e.getY());
+	//This will print out the coordinates of where you click
+}
+
+public void KeyPressed(KeyEvent e) {
+	System.out.println("key pressed: " + e.getKey());
+	//This will print out which key was pressed
+}
+		</pre></code></div>
+		
+		%include templates/parts/footer.html
+
+	</div>
+</body>
