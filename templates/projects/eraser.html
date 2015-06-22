@@ -1,0 +1,53 @@
+<head>
+
+  %include templates/parts/head.html
+
+
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  %include templates/parts/navBar.html
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Header -->
+    <div id="pageHeader">
+      <h1>
+        All Your GObject
+      </h1>
+      <p>
+        Problem written by Bryce C-R, Julia Lee, Chris Piech, and TY Huang
+      </p>
+      <p>
+        Handouts:
+        <a href ="{{pathToRoot}}handouts/graphics.html">Graphics Reference</a>
+        <br/>
+        Worked Example: 
+        <a href ="{{pathToRoot}}projects/target.html">Target</a>
+        <br/>
+      </p>
+
+    </div>
+    <hr/>
+
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          Add 2 GRects and 2 GOvals to the screen (any size or color). If the user clicks any of the GObjects, it should be removed from the screen.
+        </p>
+        <p>
+          <center>
+            <img style="width:500px" src="{{pathToRoot}}img/projects/sandcastles/eraser.png">  
+          </center>
+        </p>
+      </div>
+    </div>
+
+    <br/>
+    
+    %include templates/parts/footer.html
+
+  </div>
+</body>
