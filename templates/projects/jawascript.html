@@ -1,0 +1,106 @@
+<head>
+
+	%include templates/parts/head.html
+
+
+</head>
+<body>
+
+	<!-- Navigation Bar -->
+	%include templates/parts/navBar.html
+
+	<!-- Main Content -->
+	<div class="container">
+
+		<!-- Header -->
+		<div id="pageHeader">
+			<h1>
+				JawaScript: Starting the JavaScript Party in the Desert!
+			</h1>
+			<p>
+				Written by Bryce Cronkite-Ratcliff
+			</p>
+			<p>
+				Handouts:
+				<a href ="{{pathToRoot}}projects/jsJSSyntax.html">JavaScript Syntax Handout</a>
+			</p>
+
+		</div>
+		<hr/>
+
+		<div class="row">
+			<div class="col-md-12">
+				<p>
+The‭ ‬best‭ ‬way‭ ‬to‭ ‬learn‭ ‬a‭ ‬new‭ ‬language‭ ‬is‭ ‬to‭ ‬try‭ ‬to‭ ‬say‭ ‬something‭ ‬in‭ ‬it‭! ‬Open‭ ‬the‭ ‬program‭ ‘‬Brackets‭’ ‬and‭ ‬open‭ ‬the‭ ‬file‭ ‬problems.js.‭ ‬In‭ ‬this‭ ‬file,‭ ‬there‭ ‬are‭ ‬a‭ ‬few‭ ‬JavaScript‭ ‬functions‭ ‬that‭ ‬need‭ ‬to‭ ‬be‭ ‬implemented.‭ ‬Write‭ ‬your‭ ‬JavaScript‭ ‬code‭ ‬in‭ ‬here‭ ‬according‭ ‬to‭ ‬the‭ ‬instructions‭ ‬above‭ ‬each‭ ‬function.‭ 
+                </p>
+                <p>
+                    Your screen should look like the image below: 
+				</p>
+				<p>
+					<center>
+						<img style="width:500px" src="{{pathToRoot}}img/projects/jawascript/brackets.png">	
+					</center>
+				</p>
+				<p>
+					To‭ ‬run‭ ‬your‭ ‬code,‭ ‬press‭ ‬the‭ ‬lightening‭ ‬bolt‭ ‬symbol‭ ‬in‭ ‬the‭ ‬upper‭ ‬left‭ ‬hand‭ ‬corner‭ ‬of‭ ‬the‭ ‬Brackets‭ ‬window‭; ‬this‭ ‬will‭ ‬open‭ ‬the‭ ‬Chrome‭ ‬web‭ ‬browser.‭ ‬Press‭ ‬Ctrl-Shift-J‭ ‬to‭ ‬open‭ ‬the‭ ‬developer‭ ‬console‭ ‬where‭ ‬the‭ ‬output‭ ‬from‭ ‬your‭ ‬program‭ ‬will‭ ‬be‭ ‬visible. You can also access the console from the Chrome interface as indicated here:
+                </p>
+                    <center>
+                	   <img style="width:500px" src="{{pathToRoot}}img/developer-console.png">	
+                    </center>
+                <p>
+
+                    Be sure to check out the JavaScript Syntax handout (linked at the top of this page) to make sure your Javascript has the right format!
+                </p>
+                
+                <p>
+                    Good Luck!
+				</p>
+
+			</div>
+
+		</div>
+
+		<!--<div class="row">
+			<div class="col-md-12">
+				<h2>Solution</h2>
+
+
+<pre id="editor" style="height:300px">public class Target extends GraphicsProgram {
+
+	public void run() {
+		drawCenteredCircle(150, Color.RED);
+		drawCenteredCircle(100, Color.WHITE);
+		drawCenteredCircle(50, Color.RED);
+	}
+
+	private void drawCenteredCircle(int radius, Color color) {
+		GOval oval = new GOval(radius * 2, radius * 2);
+		double x = (getWidth() - oval.getWidth()) / 2;
+		double y = (getHeight() - oval.getHeight()) / 2;
+		oval.setFilled(true);
+		oval.setColor(color);
+		add(oval, x, y);
+	}
+
+}</pre>
+    
+<script src="{{pathToRoot}}plugins/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor");
+   editor.setTheme('ace/theme/eclipse');
+   editor.getSession().setMode("ace/mode/java");
+   editor.setReadOnly(true);
+   editor.renderer.setShowGutter(false); 
+    /*editor.setTheme("ace/theme/eclipse");
+    editor.getSession().setMode("ace/mode/java");*/
+</script>
+
+			</div>
+
+		</div>-->
+
+		
+		%include templates/parts/footer.html
+
+	</div>
+</body>
