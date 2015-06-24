@@ -2,3 +2,5 @@
 *.pyc
 index.html
 plugins/*.pyc
+/projects
+/handouts
