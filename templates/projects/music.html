@@ -41,15 +41,15 @@
 					</center>
 				</p>
 				<p>
-					Write a program that reads in notes from the user (or a pause) until the user enters the String "play." Then play the composition back to the user.
+					Write a program that reads in notes from a file and play the composition back to the user.
 				</p>
-				<p>
+				<!--<p>
 					<center>
 						<img style="width:450px" src="{{pathToRoot}}img/projects/music/mary.png">
 
 					</center>
 				</p>
-				<p>Just for fun: Can you figure out what the above song plays?</p>
+				<p>Just for fun: Can you figure out what the above song plays?</p>-->
 			</div>
 		</div>
 
@@ -114,10 +114,20 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Tips and Tricks</h2>
-				<p><b>Playing up an Octave</b>: To play an octave up (when the note is an upper case letter), all you have to do is double the frequency. For example, if the original C is 130.81, then the higher C one octave up is 2 * 130.81 = 261.62
+				<p><b>Playing up an Octave<br/></b>To play an octave up (when the note is an upper case letter), all you have to do is double the frequency. For example, if the original C is 130.81, then the higher C one octave up is 2 * 130.81 = 261.62
 				</p>
 
-        <p>To compare strings, don't use the == operator. Instead you should use:</p>
+				<p>
+					<b>Use Methods<br/></b>
+					You might find it easier to write a method to play each note:
+					<div class="well"><code>private void playG() {<br/>
+		&nbsp;&nbsp;&nbsp;ArrayList&lt;Double&gt; example = Audio.getNoteSamples(G, NOTE_LENGTH); <br/>
+		&nbsp;&nbsp;&nbsp;Audio.play(example);<br/>
+	}</code></div>
+				</p>
+
+				<b>Compare Strings<br/></b>
+        		<p>To compare strings, don't use the == operator. Instead you should use:</p>
 				<div class="well"><code><i>s1</i>.equals(<i>s2</i>)</code></div>
 				<p>That's all! Welcome to the world of ArrayLists and computer music. If you finish early try an extension.</p>
         
