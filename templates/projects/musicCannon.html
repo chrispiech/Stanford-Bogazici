@@ -54,15 +54,13 @@
         
         <p>The code to do a push has the following format:</p>
         <pre><code>$.post( "http://A COOL URL", { A KEY: VALUE TO USE } );</code></pre>
-        <p>A COOL URL, A KEY, and VALUE TO USE are not real program values; they represent what we have to replace to make this code work in our specific program. We need to provide the above code with a real url to use and a good key and value. For example, in our message application, our url was <pre>http://bogazici-messenger.meteor.com/message</pre>, and our key was 'message', and our value was the parameter passed into our function, that is:</p>
-        <pre><code>$.post( "http://bogazici-messenger.meteor.com", { message: value } );</code></pre>
-    <p>Now, in this program, our url is</p>
+        <p>A COOL URL, A KEY, and VALUE TO USE are not real program values; they represent what we have to replace to make this code work in our specific program. <p>Now, in this program, our url is</p>
     <pre>http://music-cannon.meteor.com/music</pre>
-    and our key is <strong>note</strong>.
+    , our key is <strong>note</strong>, and our value is passed into the function as a parameter.
     
             <h3 id="toc_4">Now hook up the callback to your text box!</h3>
     
-    <p>Now that we can push to the server, we need to hook up our text box to the function we just created so that when the text box entry changes, the function we wrote is called so that the data is passed to the server! We can do this with an event listener, much like we did with random circles. We just need to add the following to our input tag, where this.value is used to retrieve the current text inside the text box and pass it to the functoin</p>
+    <p>Now that we can push to the server, we need to hook up our text box to the function we just created so that when the text box entry changes, the function we wrote is called so that the data is passed to the server! We can do this with an event listener, much like we did with random circles. We just need to add the following to our input tag, where this.value is used to retrieve the current text inside the text box and pass it to the function</p>
     <pre><code>&lt;input type=&quot;text&quot; onchange=&quot;NAME_OF_FUNCTION_THAT_PUSHES(this.value)&quot;&gt;</code></pre>
     
     <p>Make sure to put the right function name into the above code</p>
